@@ -33,6 +33,15 @@ app.get('/wordstats', async (req, res, next) => {
     }
 });
 
+app.post('/resetCounts', async (req, res, next) => {
+    try {
+        let success = await wordCounter.resetCounts();
+        res.sendStatus(success ? 202 : 500);  // TODO: handle better?
+    } catch (error) {
+        next(error);
+    }
+});
+
 // 404
 app.use(function(req, res, next) {
     return res.status(404).send({ message: 'Not found.' });

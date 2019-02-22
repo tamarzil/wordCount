@@ -12,8 +12,10 @@ class wordCounter {
             let type = params.type;
             let input = params.input;
 
+            console.log('reading file...');
             return this._getProcessPromise(type, input)
                 .then(text => {
+                    console.log(`got text of length ${text.length}. Extracting words...`);
                     let words = textUtils.extractWordsFromText(text);
                     let wordCounts = words.reduce((wordCounts, word) => {
                         if (!wordCounts[word]) {
@@ -22,8 +24,10 @@ class wordCounter {
                         wordCounts[word]++;
                         return wordCounts;
                     }, {});
+                    console.log(`updating DB...`);
                     return dal.updateWordCounts(wordCounts)
                         .then(result => {
+                            console.log(`finished updating DB...`);
                             resolve(result);
                         })
                         .catch(error => {
@@ -40,6 +44,17 @@ class wordCounter {
         let word = params.word;
         let count = await dal.getWordCount(word);
         return { result: count };
+    }
+
+    async resetCounts() {
+        return new Promise((resolve, reject) => {
+            return dal.resetCounts()
+                .then(() => {
+                    resolve(true);
+                }).catch(error => {
+                    reject(error);
+                });
+        });
     }
 
     _getProcessPromise(type, input) {

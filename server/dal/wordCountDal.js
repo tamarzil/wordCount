@@ -43,6 +43,21 @@ class wordCountDal {
                 });
         });
     }
+
+    async resetCounts() {
+        return new Promise((resolve, reject) => {
+            let query = sql.delete(`main.word_count`).toParams({placeholder: '?'});
+
+            return mysql.executeQuery(query.text, query.values)
+                .then(result => {
+                    resolve();
+                })
+                .catch(error => {
+                    console.log(error);
+                    reject(error);
+                });
+        });
+    }
 }
 
 module.exports = new wordCountDal();
