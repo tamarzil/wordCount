@@ -1,0 +1,6 @@
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'pass1234';
+
+
+for docker-compose:
+docker run --name lemon-mysql -e MYSQL_ROOT_PASSWORD=pass1234 -p 3306:3306 -d mysql:5.7
+
