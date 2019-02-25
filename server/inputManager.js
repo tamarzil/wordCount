@@ -3,6 +3,7 @@
 let fs = require('fs');
 let http = require('http');
 let https = require('https');
+let request = require('request');
 
 
 class inputManager {
@@ -37,6 +38,14 @@ class inputManager {
                 reject(error);
             });
         });
+    }
+
+    createReadStreamFromFile(path) {
+        return fs.createReadStream(path);
+    }
+
+    createReadStreamFromUrl(url) {
+        return request(url);
     }
 }
 

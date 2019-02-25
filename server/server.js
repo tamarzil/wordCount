@@ -15,7 +15,7 @@ app.post('/wordcount', async (req, res, next) => {
     let params = req.body;
 
     try {
-        let persisted = await wordCounter.countWords(params);
+        let persisted = await wordCounter.countWordsStream(params); //wordCounter.countWords(params);
         res.sendStatus(persisted ? 202 : 500);  // TODO: handle better?
     } catch (error) {
         next(error);
