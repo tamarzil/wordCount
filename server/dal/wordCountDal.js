@@ -41,31 +41,6 @@ class wordCountDal {
                     console.log(error);
                     reject(error);
                 });
-
-            // let promises = Object.keys(wordCounts).map(key => {
-            //     let query = sql.insert('main.word_count', 'word', 'count')
-            //         .values([key, wordCounts[key]])
-            //         .onDuplicateKeyUpdate([{ count: `count + VALUES(count)` }])
-            //         .toParams({placeholder: '?'});
-            //     return mysql.executeQuery(query.text, query.values)
-            //         .then(result => {
-            //             console.log('DB query completed successfully!');
-            //             resolve(true);
-            //         })
-            //         .catch(error => {
-            //             console.log(error);
-            //             reject(error);
-            //         });
-            // });
-
-            // return Promise.all(promises)
-            //     .then(result => {
-            //         resolve(true);
-            //     })
-            //     .catch(error => {
-            //         console.log(error);
-            //         reject(error);
-            //     });
         });
     }
 

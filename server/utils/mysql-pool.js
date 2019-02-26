@@ -5,6 +5,7 @@ const mysql = require('mysql');
 class mysqlPool {
 
     constructor() {
+        console.log('initializing DB...');
         this.init();
     }
 
