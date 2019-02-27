@@ -4,10 +4,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const wordCounter = require('./wordCounter');
 const wordCountQueue = require('./utils/queue');
+const config = require('./config');
 
 const app = express();
 
-const port = 3000;
+const PORT = config.server.port;
 
 wordCountQueue.initProducer().then(() => {
     app.use(bodyParser.json());
@@ -55,7 +56,7 @@ wordCountQueue.initProducer().then(() => {
         return res.status(500).send({error: err});
     });
 
-    app.listen(port, () => {
-        console.log(`listening on port ${port}...`);
+    app.listen(PORT, () => {
+        console.log(`listening on port ${PORT}...`);
     });
 }).catch();

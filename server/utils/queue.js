@@ -2,10 +2,11 @@
 
 const redisQueue = require('rsmq');
 const rsmqWorker = require('rsmq-worker');
+const config = require('../config');
 
-const WORD_COUNT_QUEUE_NAME = 'wordCountQueue';
-const REDIS_HOST = 'localhost';
-const REDIS_PORT = 6379;
+const WORD_COUNT_QUEUE_NAME = config.queue.word_count_queue_name;
+const REDIS_HOST = config.queue.host;
+const REDIS_PORT = config.queue.port;
 
 class wordCountQueue {
 

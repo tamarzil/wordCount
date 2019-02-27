@@ -3,9 +3,11 @@
 let stream = require('stream');
 let readline = require('readline');
 const dal = require('./dal/wordCountDal');
-const inputManager = require('./inputManager');
+const inputManager = require('./utils/inputManager');
 let queue = require('./utils/queue');
+const config = require('./config');
 
+const CHUNK_LENGTH = config.misc.chunk_length;
 
 class wordCounter {
 
@@ -14,19 +16,14 @@ class wordCounter {
         let type = params.type;
         let input = params.input;
 
-        if (type === 'text') {
-            return this.countWords(params);
-        }
-
         return new Promise((resolve, reject) => {
-
             let chunk = '';
             let readStream = this._getReadStream(type, input);
             let rl = readline.createInterface(readStream, new stream());
             rl.on('line', async line => {
                 chunk += line;
                 chunk += ' ';
-                if (chunk.length > 10000) {
+                if (chunk.length > CHUNK_LENGTH) {
                     let text = chunk;
                     chunk = '';
                     this.enqueueText(text).then();
@@ -81,6 +78,9 @@ class wordCounter {
                 return inputManager.createReadStreamFromFile(input);
             case 'url':
                 return inputManager.createReadStreamFromUrl(input);
+            case 'text':
+            default:
+                return inputManager.createReadStreamFromText(input);
         }
     }
 }

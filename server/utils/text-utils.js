@@ -9,6 +9,7 @@ class textUtils {
 
     extractWordsFromText(text) {
         return this.removePunctuation(text)
+            .trim()
             .split(/\s+/)
             .filter(word => !word.match(/^-?[0-9]+$/g))
             .map(word => word.toLowerCase())

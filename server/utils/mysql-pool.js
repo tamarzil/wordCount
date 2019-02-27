@@ -1,6 +1,8 @@
 'use strict';
 
 const mysql = require('mysql');
+const config = require('../config');
+
 
 class mysqlPool {
 
@@ -11,12 +13,11 @@ class mysqlPool {
 
     init() {
         this.pool  = mysql.createPool({
-            connectionLimit : 10,
-            host            : 'localhost',
-            user            : 'root',
-            password        : 'pass1234'
+            host            : config.mysql.host,
+            user            : config.mysql.user,
+            password        : config.mysql.password,
+            connectionLimit : config.mysql.pool_max_connections
         });
-        // TODO: move DB host and creds to configuration
     }
 
     executeQuery(query, params) {

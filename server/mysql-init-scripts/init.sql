@@ -1,0 +1,8 @@
+
+CREATE DATABASE main;
+
+USE main;
+CREATE TABLE word_count (
+	word VARCHAR(200) NOT NULL PRIMARY KEY,
+    count INT DEFAULT 0 NOT NULL
+)
