@@ -1,2 +1,5 @@
 node_modules/
+sampleFiles/
+npm-debug.log
+report.*.json
 
