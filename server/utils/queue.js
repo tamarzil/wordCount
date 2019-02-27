@@ -19,6 +19,7 @@ class wordCountQueue {
                 port: REDIS_PORT
             });
 
+            let self = this;
             this.rsmq.listQueues(function (error, queues) {
                 if (error) {
                     console.log(error);
@@ -27,7 +28,7 @@ class wordCountQueue {
                     console.log(`queue ${WORD_COUNT_QUEUE_NAME} already exists`);
                     resolve();
                 } else {
-                    return this.rsmq.createQueueAsync({qname: WORD_COUNT_QUEUE_NAME})
+                    return self.rsmq.createQueueAsync({qname: WORD_COUNT_QUEUE_NAME})
                         .then(response => {
                             console.log("wordCountQueue created");
                             resolve();

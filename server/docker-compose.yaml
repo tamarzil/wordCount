@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+
+  lemon-server:
+    build:
+      context: .
+      dockerfile: Dockerfile-server
+    ports:
+      - "80:8080"
+
+  lemon-worker:
+      build:
+        context: .
+        dockerfile: Dockerfile-worker
+
+  lemon-mysql:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=pass1234
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./mysql-init-scripts:/docker-entrypoint-initdb.d"
+
+  lemon-redis:
+    image: redis
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - "6379:6379"

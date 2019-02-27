@@ -2,16 +2,16 @@
 
 const config = {
     'server': {
-        'port': 3000
+        'port': 8080
     },
     'mysql': {
-        'host': 'localhost',
+        'host': 'lemon-mysql',
         'user': 'root',
         'password': 'pass1234',
         'pool_max_connections': 10
     },
     'queue': {
-        'host': 'localhost',
+        'host': 'lemon-redis',
         'port': 6379,
         'word_count_queue_name': 'wordCountQueue'
     },
